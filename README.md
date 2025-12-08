@@ -1,12 +1,9 @@
 # 🏈 2023 NFL Player Performance Dashboard
 
 ![Dashboard Preview](assets/dashboard-main.png)
-*(Note: Replace 'dashboard-main.png' with the actual name of your screenshot)*
 
 ## 📄 Project Overview
 This interactive Power BI dashboard analyzes performance metrics for NFL players across multiple positions (QB, RB, WR, TE). The goal was to transform raw statistical data into a decision-support tool for fantasy football analysis, identifying high-performing outliers and efficiency trends.
-
-**[View the Static PDF Version Here](NFL_Dashboard_Export.pdf)**
 
 ## 🛠 Tools Used
 - **Microsoft Power BI** (Data Visualization & UI)
