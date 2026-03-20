@@ -1,69 +1,109 @@
 # 🏈 2023 NFL Player Performance Dashboard
 
+An interactive Power BI dashboard that transforms raw 2023 NFL statistics into a decision-support tool for fantasy football analysis and player evaluation. Combines advanced DAX measures, dynamic quadrant analysis, and a dark-mode UI to surface player efficiency trends at a glance.
 
-## 📄 Project Overview
-This interactive Power BI dashboard analyzes performance metrics for NFL players across multiple positions (QB, RB, WR, TE). The goal was to transform raw statistical data into a decision-support tool for fantasy football analysis, identifying high-performing outliers and efficiency trends.
+![Power BI](https://img.shields.io/badge/Power%20BI-Desktop-F2C811?logo=powerbi)
+![DAX](https://img.shields.io/badge/DAX-Custom%20Measures-yellow)
+![Power Query](https://img.shields.io/badge/Power%20Query-M-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 🛠 Tools Used
-- **Microsoft Power BI** (Data Visualization & UI)
-- **DAX** (Custom Measures & Complex Calculations)
-- **Power Query** (Data Cleaning & Transformation)
+---
 
-## 📊 Key Features
-- **Unified Metrics:** Used DAX to create a `Total Yards` measure that combines Passing and Rushing stats, solving data silo issues for dual-threat players.
-- **Dynamic Quadrant Analysis:** Scatter plots feature dynamic average lines that recalculate based on the selected position, separating elite performers from the average.
-- **Dark Mode UI:** Designed a high-contrast, accessible interface with rounded visuals and clean KPI cards.
-- **Position Filtering:** Custom slicers allow users to toggle between positions (QB vs. RB) to instantly update all visuals and rankings.
+## 📌 Overview
 
-## 🧠 Technical Highlights
-**1. Custom DAX Measure:**
-To capture total offensive output, I created a flexible measure that aggregates yards regardless of source:
+This project analyzes performance metrics for NFL players across four positions — QB, RB, WR, and TE — using the 2023 season dataset. The goal was to build a reusable analytics template that goes beyond standard box scores to identify efficiency trends and outlier performers.
+
+---
+
+## ✨ Features
+
+- **Unified Yardage Metric** — Custom DAX measure combines passing and rushing yards to handle dual-threat players without double-counting
+- **Dynamic Quadrant Analysis** — Scatter plots with average lines that recalculate automatically based on the selected position filter
+- **Position Slicers** — Toggle between QB, RB, WR, and TE to instantly update all visuals and rankings
+- **Dark Mode UI** — High-contrast interface with rounded visuals, clean KPI cards, and consistent color language
+- **PDF Exports** — Pre-generated position-specific reports included in the repo
+
+---
+
+## 🗂️ Repository Contents
+
+| File | Description |
+|------|-------------|
+| `2023_NFL_STATS_PROJECT.pbix` | Main Power BI dashboard file |
+| `QB_Stats.pdf` | Exported quarterback analysis |
+| `RB_Stats.pdf` | Exported running back analysis |
+| `WR_Stats.pdf` | Exported wide receiver analysis |
+| `TE_Stats.pdf` | Exported tight end analysis |
+
+---
+
+## 🛠️ Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| **Power BI Desktop** | Data visualization and report building |
+| **DAX** | Custom measures and KPI calculations |
+| **Power Query (M)** | Data extraction, cleaning, and transformation |
+| **Data Modeling** | Relationships between player, team, and seasonal tables |
+
+---
+
+## 🧠 Key DAX Measures
+
+**Total Yards** — aggregates offensive output regardless of source, correctly handling dual-threat players:
+
 ```dax
-Total Yards = SUM('Stats'[passing_yards]) + SUM('Stats'[rushing_yards])
+Total Yards =
+SUM('Stats'[passing_yards]) + SUM('Stats'[rushing_yards])
 ```
-## 📊 Frequently Asked Questions (FAQ)
 
-Explore the details of the NFL Stats Power BI project through these common questions and answers.
+**Yards per Attempt (Y/A)** — efficiency metric beyond raw volume:
 
----
-
-### 🏈 Project Overview
-
-**Q: What is the primary goal of this dashboard?** **A:** This project provides a comprehensive, interactive visualization of NFL player and team performance. It transforms raw seasonal data into actionable insights for fantasy football, team scouting, and general sports analytics.
-
-**Q: What tools were used to build this?** **A:** The project is built entirely within the **Microsoft Power BI** ecosystem, utilizing:
-* **Power Query (M):** For data extraction and cleaning.
-* **DAX:** For complex calculations and custom KPIs.
-* **Data Modeling:** To create relationships between player, team, and seasonal tables.
+```dax
+YPA =
+DIVIDE(SUM('Stats'[passing_yards]), SUM('Stats'[pass_attempts]), 0)
+```
 
 ---
 
-### 📈 Data & Insights
+## 📊 Analyses Covered
 
-**Q: What specific stats can I analyze?** **A:** The dashboard covers three main pillars of NFL data:
-* **Passing:** Yards, TDs, Interceptions, and Passer Rating.
-* **Rushing/Receiving:** Volume stats (Attempts/Targets) vs. Efficiency (Yards per Carry/Catch).
-* **Team Performance:** Scoring trends and offensive/defensive output.
-
-**Q: Can I compare players side-by-side?** **A:** Yes! Using the built-in **Slicers**, you can filter for specific players or positions to see how they stack up against each other in real-time.
-
-**Q: How is the "Efficiency" calculated?** **A:** We use custom DAX measures to calculate "true" performance metrics that go beyond box scores, such as **Yards per Attempt ($Y/A$)** and **Touchdown-to-Interception ratios**.
+- **Passing:** Yards, TDs, interceptions, passer rating, Y/A
+- **Rushing/Receiving:** Volume (attempts/targets) vs. efficiency (yards per carry/catch)
+- **Team Performance:** Scoring trends, offensive and defensive output
+- **Quadrant Analysis:** Elite vs. average separation by position
+- **Fantasy Value:** Identifying sleeper candidates based on target share and touch volume
 
 ---
 
-### ⚙️ Technical Setup
+## 🚀 Getting Started
 
-**Q: How do I refresh the data with the latest stats?** **A:** 1. Download the latest CSV/Excel data files.
-2. Replace the files in the `/Data` folder of this repository.
-3. Open the `.pbix` file in Power BI Desktop and click **Refresh**.
+### Prerequisites
 
-**Q: Can I use this for my own Fantasy Football league?** **A:** Absolutely. This tool is designed to help identify "sleeper" players by looking at volume metrics (targets and touches) that aren't always visible in standard league apps.
+- [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free)
+
+### Opening the Dashboard
+
+1. Clone or download this repository
+2. Open `2023_NFL_STATS_PROJECT.pbix` in Power BI Desktop
+3. If prompted with a **Data Source Error**, go to:
+   - **Transform Data** → **Data Source Settings** → **Change Source**
+   - Point the path to the data files on your local machine
+
+### Refreshing with New Data
+
+1. Download updated CSV/Excel stats files
+2. Replace the files in the data source location
+3. Click **Refresh** in Power BI Desktop
 
 ---
 
-### 🚀 Getting Started
+## 📝 License
 
-**Q: I see a "Data Source Error"—how do I fix it?** **A:** Because file paths change between computers, you may need to:
-1. Go to **Transform Data** > **Data Source Settings**.
-2. Click **Change Source**.
-3. Point the file path to the location of the data files on your local machine.
+MIT — free to use, fork, and build on.
+
+---
+
+## 🤝 Contact
+
+**Sky Moon** — [sky.moon7567@gmail.com](mailto:sky.moon7567@gmail.com) | [LinkedIn](https://linkedin.com/in/sky-moon/)
